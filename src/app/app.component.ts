@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TodosService } from './services/todos.service';
+// Services
+import { TodosService } from '@services/todos.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,9 @@ import { TodosService } from './services/todos.service';
       <a routerLink="/reactive-todo" routerLinkActive="active">Reactive Todo</a>
     </nav>
     <!-- Uncomment to test observable shared outside of the Reactive-todo component -->
-    <!-- <ng-container *ngIf="{ count : todosService.nbTodos$ | async } as nbTodo">
-    <label *ngIf="nbTodo.count !== null">Todo: {{nbTodo.count}}</label>
-  </ng-container> -->
+    <!-- <ng-container *ngIf="{ count: todosService.nbTodos$ | async } as nbTodo">
+      <label *ngIf="nbTodo.count !== null">Todo: {{ nbTodo.count }}</label>
+    </ng-container> -->
     <router-outlet></router-outlet>
   `,
   styles: [

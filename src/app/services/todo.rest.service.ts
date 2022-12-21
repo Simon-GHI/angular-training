@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { delay, map, Observable, of, switchMap, tap } from 'rxjs';
-import { Todo } from '../models/todo';
+import { delay, Observable } from 'rxjs';
+// Models
+import { Todo } from '@models/todo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoRestService {
-
   private _todos: Todo[] = [
     { id: 1, title: 'Todo 1', completed: false },
     { id: 2, title: 'Todo 2', completed: false },
@@ -20,14 +20,12 @@ export class TodoRestService {
     { id: 10, title: 'Todo 10', completed: false },
   ];
 
-  constructor() { }
-
   /**
    * Get todos list
    */
   getTodos(): Observable<Todo[]> {
-    return new Observable<Todo[]>((observer) => {
-      console.log("Get list of todos");
+    return new Observable<Todo[]>(observer => {
+      console.log('Get list of todos');
       // Return a copy of todos to avoid side effects
       const todos = [...this._todos.map(todo => ({ ...todo }))];
       // Uncomment to simulate side effects. Data will be updated before the observable is emitted
@@ -39,19 +37,19 @@ export class TodoRestService {
 
   /**
    * Set a todo as completed by id
-   * 
-   * @param id 
+   *
+   * @param id
    * @error Todo not found
    */
   setTodoCompletedById(id: number): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      const todo = this._todos.find(todo => todo.id === id);
-      if (!todo) {
+    return new Observable<boolean>(observer => {
+      const todoToComplete = this._todos.find(todo => todo.id === id);
+      if (!todoToComplete) {
         // Simulate an error
         observer.error('Todo not found');
         observer.next(false);
       } else {
-        todo.completed = true;
+        todoToComplete.completed = true;
         observer.next(true);
       }
       observer.complete();
@@ -60,15 +58,13 @@ export class TodoRestService {
 
   /**
    * Delete a todo by id
-   * @param id 
+   * @param id
    */
   deleteTodoById(id: number): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      this._todos = this._todos.filter(todo => todo.id !== id)
+    return new Observable<boolean>(observer => {
+      this._todos = this._todos.filter(todo => todo.id !== id);
       observer.next(true);
       observer.complete();
     }).pipe(delay(50));
   }
-
-
 }

@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoListComponent } from 'src/app/components/todo-list/todo-list.component';
-import { TodosService } from 'src/app/services/todos.service';
-import { Todo } from 'src/app/models/todo';
+// Components
+import { TodoListComponent } from '@components/todo-list/todo-list.component';
+// Models
+import { Todo } from '@models/todo';
+// Services
+import { TodosService } from '@services/todos.service';
 
 @Component({
   selector: 'app-reactive-todo',
@@ -13,7 +16,7 @@ import { Todo } from 'src/app/models/todo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactiveTodoComponent {
-  constructor(public todosService: TodosService) { }
+  constructor(public todosService: TodosService) {}
 
   onDeleteTodo(todo: Todo) {
     this.todosService.deleteTodo(todo);

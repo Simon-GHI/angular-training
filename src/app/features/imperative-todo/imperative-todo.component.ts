@@ -1,12 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoRestService } from 'src/app/services/todo.rest.service';
-import { Todo } from 'src/app/models/todo';
-import { TodoListComponent } from 'src/app/components/todo-list/todo-list.component';
+// Components
+import { TodoListComponent } from '@components/todo-list/todo-list.component';
+// Models
+import { Todo } from '@models/todo';
+// Services
+import { TodoRestService } from '@services/todo.rest.service';
 
 @Component({
   selector: 'app-imperative-todo',
@@ -42,9 +41,9 @@ export class ImperativeTodoComponent {
   private getTodos() {
     this.todos = undefined;
     this.nbTodosCompleted = undefined;
-    this.todosRestService.getTodos().subscribe((todos) => {
+    this.todosRestService.getTodos().subscribe(todos => {
       this.todos = [...todos];
-      this.nbTodosCompleted = todos.filter((todo) => todo.completed).length;
+      this.nbTodosCompleted = todos.filter(todo => todo.completed).length;
     });
   }
 }

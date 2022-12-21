@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Todo } from 'src/app/models/todo';
+// Models
+import { Todo } from '@models/todo';
 
 @Component({
   selector: 'app-todo-list [todos]',
@@ -8,7 +15,7 @@ import { Todo } from 'src/app/models/todo';
   imports: [CommonModule],
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {
   @Input() todos?: Todo[] | null;

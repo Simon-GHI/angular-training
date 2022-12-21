@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
-  combineLatestWith,
   map,
   merge,
   Observable,
   of,
-  share,
   shareReplay,
   startWith,
   switchMap,
   take,
   tap,
 } from 'rxjs';
-import { Todo } from '../models/todo';
-import { TodoRestService } from './todo.rest.service';
+// Models
+import { Todo } from '@models/todo';
+// Services
+import { TodoRestService } from '@services/todo.rest.service';
 
 @Injectable({
   providedIn: 'root',
@@ -85,18 +85,17 @@ export class TodosService {
   private initNbTodos$(): Observable<number | null> {
     return this.todos$.pipe(
       startWith(undefined),
-      map((todos) => (todos ? todos.length : null))
+      map(todos => (todos ? todos.length : null))
     );
   }
 
   private initNbTodosCompleted$(): Observable<number | null> {
     return this.todos$.pipe(
       startWith(undefined),
-      map((todos) =>
-        todos ? todos.filter((todo) => todo.completed).length : null
-      )
+      map(todos => (todos ? todos.filter(todo => todo.completed).length : null))
     );
   }
+
   /**
    * Trigger a refresh of todos
    */
