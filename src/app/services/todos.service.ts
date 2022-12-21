@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatestWith, map, merge, Observable, of, share, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatestWith,
+  map,
+  merge,
+  Observable,
+  of,
+  share,
+  shareReplay,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { Todo } from '../models/todo';
 import { TodoRestService } from './todo.rest.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodosService {
   todos$: Observable<Todo[] | undefined>;
@@ -23,11 +36,14 @@ export class TodosService {
   }
 
   public setTodoCompleted(todo: Todo): void {
-    this.todoRestService.setTodoCompletedById(todo.id).pipe(
-      // Take 1 to unsubscribe after the first value is emitted
-      take(1),
-      // Tap to refresh todos
-      tap(() => this.refreshTodos()))
+    this.todoRestService
+      .setTodoCompletedById(todo.id)
+      .pipe(
+        // Take 1 to unsubscribe after the first value is emitted
+        take(1),
+        // Tap to refresh todos
+        tap(() => this.refreshTodos())
+      )
       .subscribe(() => {
         // Display a success/error message
       });
@@ -35,54 +51,49 @@ export class TodosService {
 
   /**
    * Delete a todo & trigger a refresh of todos
-   * @param todo 
+   * @param todo
    */
   public deleteTodo(todo: Todo): void {
-    this.todoRestService.deleteTodoById(todo.id).pipe(
-      // Take 1 to unsubscribe after the first value is emitted
-      take(1),
-      // Tap to refresh todos
-      tap(() => this.refreshTodos()))
+    this.todoRestService
+      .deleteTodoById(todo.id)
+      .pipe(
+        // Take 1 to unsubscribe after the first value is emitted
+        take(1),
+        // Tap to refresh todos
+        tap(() => this.refreshTodos())
+      )
       .subscribe(() => {
         // Display a success/error message
       });
   }
 
   /**
-   * Init todos observable. 
+   * Init todos observable.
    */
   private initTodos$(): Observable<Todo[] | undefined> {
     return this._refreshTodos$.pipe(
       // On each refresh, switch to the new observable
       switchMap(() =>
         //  merge undefined (to manage loading state) with the todos observable
-        merge(
-          of(undefined),
-          this.todoRestService.getTodos()
-        ),
+        merge(of(undefined), this.todoRestService.getTodos())
       ),
       // Share the observable to avoid multiple calls
-      // shareReplay({ bufferSize: 1, refCount: true })
+      shareReplay({ bufferSize: 1, refCount: true })
     );
   }
-
 
   private initNbTodos$(): Observable<number | null> {
     return this.todos$.pipe(
       startWith(undefined),
-      map(todos => todos ?
-        todos.length
-        : null
-      )
+      map((todos) => (todos ? todos.length : null))
     );
   }
 
   private initNbTodosCompleted$(): Observable<number | null> {
     return this.todos$.pipe(
       startWith(undefined),
-      map(todos => todos ?
-        todos.filter(todo => todo.completed).length
-        : null
+      map((todos) =>
+        todos ? todos.filter((todo) => todo.completed).length : null
       )
     );
   }
@@ -92,5 +103,4 @@ export class TodosService {
   private refreshTodos(): void {
     this._refreshTodos$.next(true);
   }
-
 }

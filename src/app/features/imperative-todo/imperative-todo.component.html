@@ -1,4 +1,10 @@
 <h2>Imperative-todo</h2>
-<label *ngIf="nbTodosCompleted !== undefined">Todo completed: {{nbTodosCompleted}}</label>
-<app-todo-list [todos]="todos" (deleteTodo)="onDeleteTodo($event)" (completeTodo)="onCompleteTodo($event)">
+<label *ngIf="nbTodosCompleted !== undefined"
+  >Todo completed: {{ nbTodosCompleted }}</label
+>
+<app-todo-list
+  [todos]="todos"
+  (deleteTodo)="onDeleteTodo($event)"
+  (completeTodo)="onCompleteTodo($event)"
+>
 </app-todo-list>
