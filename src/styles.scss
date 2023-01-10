@@ -1,1 +1,27 @@
-@use "styles/table";
+@use 'reset';
+
+// Import the modules to be used in the whole project
+@use 'margins';
+@use 'tables';
+@use 'buttons';
+
+@use 'colors';
+
+:root {
+  --color-bg: rgb(255 255 255);
+  --color-text: rgb(0 0 0);
+  --color-table-head: rgb(128 128 128);
+  --color-table-row: rgb(128 128 128 / 50%);
+}
+
+body {
+  padding: 10px;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  &[data-theme='dark'] {
+    --color-bg: rgb(0 0 0);
+    --color-text: rgb(255 255 255);
+    --color-table-head: rgb(163 11 11 / 50%);
+  }
+}

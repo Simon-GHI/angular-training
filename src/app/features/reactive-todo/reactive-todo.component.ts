@@ -22,7 +22,7 @@ export class ReactiveTodoComponent {
     this.todosService.deleteTodo(todo);
   }
 
-  onCompleteTodo($event: Todo) {
-    this.todosService.setTodoCompleted($event);
+  onCompleteTodo(todo: Todo) {
+    this.todosService.setTodoCompleted(todo);
   }
 }

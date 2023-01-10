@@ -1,0 +1,22 @@
+nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+
+    &[role='home'] {
+      text-transform: uppercase;
+    }
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  [role='switch'] {
+    margin-left: auto;
+  }
+}

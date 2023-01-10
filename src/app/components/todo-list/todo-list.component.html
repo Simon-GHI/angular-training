@@ -1,8 +1,9 @@
-<table *ngIf="todos; else tLoading">
+<table *ngIf="todos; else tLoading" class="striped">
   <thead>
     <tr>
       <th>Id</th>
       <th>Title</th>
+      <th>Priority</th>
       <th>Completed</th>
       <th></th>
       <th></th>
@@ -12,14 +13,22 @@
     <tr *ngFor="let todo of todos">
       <td>{{ todo.id }}</td>
       <td>{{ todo.title }}</td>
+      <td class="priority">
+        <span [ngClass]="todo.priority">{{ todo.priority }}</span>
+      </td>
       <td>{{ todo.completed }}</td>
       <td>
-        <button (click)="triggerCompleteTodo(todo)" [disabled]="todo.completed">
+        <button
+          (click)="triggerCompleteTodo(todo)"
+          [disabled]="todo.completed"
+          class="secondary">
           Set complete
         </button>
       </td>
       <td>
-        <button (click)="triggerDeleteTodo(todo)">Delete</button>
+        <button (click)="triggerDeleteTodo(todo)" class="primary">
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>

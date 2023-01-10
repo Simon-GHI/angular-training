@@ -2,22 +2,38 @@ import { Injectable } from '@angular/core';
 import { delay, Observable } from 'rxjs';
 // Models
 import { Todo } from '@models/todo';
+import { ETodoPriority } from '@enums/todo-priority.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoRestService {
   private _todos: Todo[] = [
-    { id: 1, title: 'Todo 1', completed: false },
-    { id: 2, title: 'Todo 2', completed: false },
-    { id: 3, title: 'Todo 3', completed: false },
-    { id: 4, title: 'Todo 4', completed: false },
-    { id: 5, title: 'Todo 5', completed: false },
-    { id: 6, title: 'Todo 6', completed: false },
-    { id: 7, title: 'Todo 7', completed: false },
-    { id: 8, title: 'Todo 8', completed: false },
-    { id: 9, title: 'Todo 9', completed: false },
-    { id: 10, title: 'Todo 10', completed: false },
+    { id: 1, title: 'Todo 1', priority: ETodoPriority.HIGH, completed: false },
+    { id: 2, title: 'Todo 2', priority: ETodoPriority.HIGH, completed: false },
+    { id: 3, title: 'Todo 3', priority: ETodoPriority.LOW, completed: false },
+    { id: 4, title: 'Todo 4', priority: ETodoPriority.HIGH, completed: false },
+    {
+      id: 5,
+      title: 'Todo 5',
+      priority: ETodoPriority.MEDIUM,
+      completed: false,
+    },
+    {
+      id: 6,
+      title: 'Todo 6',
+      priority: ETodoPriority.MEDIUM,
+      completed: false,
+    },
+    { id: 7, title: 'Todo 7', priority: ETodoPriority.HIGH, completed: false },
+    { id: 8, title: 'Todo 8', priority: ETodoPriority.LOW, completed: false },
+    { id: 9, title: 'Todo 9', priority: ETodoPriority.LOW, completed: false },
+    {
+      id: 10,
+      title: 'Todo 10',
+      priority: ETodoPriority.HIGH,
+      completed: false,
+    },
   ];
 
   /**
@@ -25,7 +41,6 @@ export class TodoRestService {
    */
   getTodos(): Observable<Todo[]> {
     return new Observable<Todo[]>(observer => {
-      console.log('Get list of todos');
       // Return a copy of todos to avoid side effects
       const todos = [...this._todos.map(todo => ({ ...todo }))];
       // Uncomment to simulate side effects. Data will be updated before the observable is emitted

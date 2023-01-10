@@ -1,8 +1,13 @@
-<h2>Reactive-todo</h2>
-<ng-container *ngIf="{ completed : todosService.nbTodosCompleted$ | async } as nbTodo">
-    <!-- Wrap into viewModel to avoid *ngIf being falsy if number is '0' -->
-    <label *ngIf="nbTodo.completed !== null">Todo completed: {{nbTodo.completed}}</label>
+<h2 class="mt-2 mb-2">Reactive-todo</h2>
+<ng-container
+  *ngIf="{ completed: todosService.nbTodosCompleted$ | async } as nbTodo">
+  <!-- Wrap into viewModel to avoid *ngIf being falsy if number is '0' -->
+  <label *ngIf="nbTodo.completed !== null"
+    >Todo completed: {{ nbTodo.completed }}</label
+  >
 </ng-container>
-<app-todo-list [todos]="todosService.todos$ | async" (deleteTodo)="onDeleteTodo($event)"
-    (completeTodo)="onCompleteTodo($event)">
+<app-todo-list
+  [todos]="todosService.todos$ | async"
+  (deleteTodo)="onDeleteTodo($event)"
+  (completeTodo)="onCompleteTodo($event)">
 </app-todo-list>

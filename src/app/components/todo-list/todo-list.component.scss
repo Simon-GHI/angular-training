@@ -1,0 +1,11 @@
+@use 'todos';
+
+td.priority {
+  // Use the map from the todos module & iterate over priorities to create the styles
+  @each $priority, $color in todos.$priorities {
+    span.#{$priority} {
+      padding: 5px;
+      background-color: $color;
+    }
+  }
+}

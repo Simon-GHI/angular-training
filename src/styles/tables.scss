@@ -1,0 +1,33 @@
+// Use of extend to create a table with default styles that will be applied to all tables
+%table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 1px solid var(--color-table-head);
+
+  th {
+    padding: 8px;
+    text-align: left;
+    background-color: var(--color-table-head);
+  }
+
+  td {
+    padding: 8px;
+  }
+
+  tr {
+    background-color: var(--color-bg);
+  }
+}
+
+table {
+  @extend %table;
+
+  &.striped {
+    @extend %table;
+
+    tr:nth-child(even) {
+      background-color: var(--color-table-row);
+    }
+  }
+}

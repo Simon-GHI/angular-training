@@ -1,0 +1,22 @@
+// Margin utilities
+$-fix-margin: 0.5rem;
+$-columns: 5;
+
+// Use of for loop to create margin utilities with custom parameters
+@for $i from 1 through $-columns {
+  .mt-#{$i} {
+    margin-top: ($-fix-margin * $i);
+  }
+
+  .mb-#{$i} {
+    margin-bottom: ($-fix-margin * $i);
+  }
+
+  .ml-#{$i} {
+    margin-left: ($-fix-margin * $i);
+  }
+
+  .mr-#{$i} {
+    margin-right: ($-fix-margin * $i);
+  }
+}

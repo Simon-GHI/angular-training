@@ -1,0 +1,36 @@
+@use 'sass:color';
+@use 'colors';
+
+// Use of mixin to create a button with custom
+@mixin button($color, $bg-color) {
+  $border-color: color.adjust($bg-color, $lightness: -10%);
+
+  padding: 0.5rem 1rem;
+  color: $color;
+  text-align: center;
+  cursor: pointer;
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background: color.adjust($bg-color, $lightness: -10%);
+    border-color: color.adjust($border-color, $lightness: -10%);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: color.adjust(rgba($bg-color, 0.5), $lightness: 10%);
+    border-color: color.adjust(rgba($border-color, 0.5), $lightness: 10%);
+  }
+}
+
+button {
+  &.primary {
+    @include button(#fff, colors.$primary-color);
+  }
+
+  &.secondary {
+    @include button(#fff, colors.$secondary-color);
+  }
+}
