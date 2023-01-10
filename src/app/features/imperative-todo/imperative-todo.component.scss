@@ -1,0 +1,10 @@
+:host {
+  // Override color defined at the root level
+  --color-table-head: green;
+  --color-table-row: orange;
+
+  body[data-theme='dark'] & {
+    --color-table-head: yellow;
+    --color-table-row: inherit;
+  }
+}
